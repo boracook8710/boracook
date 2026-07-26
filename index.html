@@ -1,34 +1,356 @@
 <!doctype html>
 <html lang="ko">
-<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>상품 1</title>
-<style>
-body{font-family:Arial,sans-serif;background:#f7f4ee;margin:0;padding:30px}
-.card{max-width:720px;margin:auto;background:#fff;border-radius:18px;overflow:hidden;box-shadow:0 8px 24px rgba(0,0,0,.12)}
-img{display:block;width:100%}
-.info{padding:20px}
-.btn{display:inline-block;background:#222;color:#fff;padding:14px 22px;border-radius:10px;text-decoration:none;font-weight:bold}
-.notice{max-width:720px;margin:0 auto 20px;background:#fff8f2;border:1px solid #f0c8a9;padding:14px;border-radius:12px;font-size:14px}
-</style></head>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="주방을 더 깔끔하게 정리하는 싱크대 정리 아이템과 다용도 주방 칼꽂이를 소개합니다.">
+  <title>보라쿡 준선생의 생활정보 | 주방 살림 레벨업 프로젝트</title>
+
+  <style>
+    :root {
+      --bg: #f7f4ee;
+      --card: #ffffff;
+      --text: #211f1c;
+      --muted: #706a63;
+      --accent: #e86f2d;
+      --accent-soft: #fff0e7;
+      --line: #e7dfd6;
+      --dark: #22252a;
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Pretendard, "Noto Sans KR", Arial, sans-serif;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    .wrap {
+      width: min(820px, calc(100% - 28px));
+      margin: 0 auto;
+      padding: 32px 0 64px;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 22px;
+    }
+
+    .brand {
+      display: inline-block;
+      margin-bottom: 10px;
+      padding: 7px 13px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: #b84c16;
+      font-size: 13px;
+      font-weight: 900;
+    }
+
+    h1 {
+      margin: 0 0 10px;
+      font-size: clamp(29px, 6vw, 44px);
+      letter-spacing: -0.045em;
+      line-height: 1.2;
+    }
+
+    .lead {
+      max-width: 610px;
+      margin: 0 auto;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.75;
+    }
+
+    .disclosure {
+      margin: 22px 0 26px;
+      padding: 15px 17px;
+      border: 1px solid #efc5a9;
+      border-radius: 15px;
+      background: #fff8f3;
+      color: #6e3820;
+      font-size: 13px;
+      line-height: 1.65;
+      text-align: center;
+      font-weight: 800;
+    }
+
+    .products {
+      display: grid;
+      gap: 28px;
+    }
+
+    .product-card {
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      background: var(--card);
+      box-shadow: 0 14px 38px rgba(33, 31, 28, 0.08);
+    }
+
+    .product-image-link {
+      position: relative;
+      display: block;
+      overflow: hidden;
+      background: #eee9e3;
+    }
+
+    .product-image-link img {
+      display: block;
+      width: 100%;
+      height: auto;
+      transition: transform .28s ease;
+    }
+
+    .product-image-link:hover img {
+      transform: scale(1.018);
+    }
+
+    .click-label {
+      position: absolute;
+      right: 15px;
+      bottom: 15px;
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: rgba(21, 21, 21, 0.9);
+      color: #fff;
+      font-size: 13px;
+      font-weight: 900;
+    }
+
+    .content {
+      padding: 22px;
+    }
+
+    .number {
+      color: var(--accent);
+      font-size: 12px;
+      font-weight: 950;
+      letter-spacing: .1em;
+    }
+
+    h2 {
+      margin: 8px 0 10px;
+      font-size: clamp(23px, 5vw, 31px);
+      letter-spacing: -0.04em;
+      line-height: 1.35;
+    }
+
+    .content p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.75;
+    }
+
+    .features {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 16px;
+    }
+
+    .features span {
+      padding: 8px 11px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: #faf8f5;
+      color: #534e48;
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .button {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 14px;
+      margin-top: 20px;
+      padding: 16px 17px;
+      border-radius: 14px;
+      background: var(--dark);
+      color: #fff;
+      transition: transform .2s ease, opacity .2s ease;
+    }
+
+    .button:hover {
+      transform: translateY(-2px);
+      opacity: .94;
+    }
+
+    .button span {
+      color: #d7d9dd;
+      font-size: 13px;
+    }
+
+    .button strong {
+      color: #fdba74;
+      font-size: 14px;
+      white-space: nowrap;
+    }
+
+    .guide {
+      margin-top: 24px;
+      padding: 17px 18px;
+      border: 1px solid var(--line);
+      border-radius: 15px;
+      background: #fff;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.75;
+    }
+
+    footer {
+      padding-top: 28px;
+      text-align: center;
+      color: #948c83;
+      font-size: 12px;
+    }
+
+    @media (max-width: 560px) {
+      .wrap {
+        width: min(100% - 18px, 820px);
+        padding-top: 20px;
+      }
+
+      .content {
+        padding: 18px 17px;
+      }
+
+      .click-label {
+        right: 10px;
+        bottom: 10px;
+      }
+
+      .button {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+
 <body>
-<div class="notice">
-이 포스팅은 쿠팡 파트너스 활동의 일환으로 일정액의 수수료를 제공받을 수 있습니다.
-</div>
+  <main class="wrap">
+    <header>
+      <span class="brand">주방 살림 레벨업 프로젝트</span>
+      <h1>주방 정리 추천 아이템</h1>
+      <p class="lead">
+        자주 사용하는 주방용품을 정돈하고, 조리 공간을 보다 깔끔하게 관리할 때
+        살펴볼 수 있는 아이템을 순서대로 소개합니다.
+      </p>
+    </header>
 
-<div class="card">
-<a href="https://link.coupang.com/a/fHwJmeevv3" target="_blank" rel="nofollow sponsored noopener noreferrer">
-<img src="1.png" alt="싱크대 정리 아이템">
-</a>
-<div class="info">
-<h2>싱크대 정리 아이템</h2>
-<p>이미지 또는 아래 버튼을 누르면 상품 페이지로 바로 이동합니다.</p>
+    <div class="disclosure" role="note">
+      이 포스팅은 쿠팡 파트너스 활동의 일환으로,
+      이에 따른 일정액의 수수료를 제공받을 수 있습니다.
+    </div>
 
-<a class="btn" href="https://link.coupang.com/a/fHwJmeevv3"
-target="_blank"
-rel="nofollow sponsored noopener noreferrer">
-상품 보러가기 →
-</a>
-</div>
-</div>
+    <section class="products" aria-label="추천 상품 목록">
+
+      <!-- 상품 1 -->
+      <article class="product-card">
+        <a
+          class="product-image-link"
+          href="https://link.coupang.com/a/fHwJmeevv3"
+          target="_blank"
+          rel="nofollow sponsored noopener noreferrer"
+          aria-label="상품 1 싱크대 정리 아이템 자세히 보기"
+        >
+          <img
+            src="1.png"
+            alt="싱크대 주변을 정리하는 주방 정리 아이템 이미지"
+          >
+          <span class="click-label">이미지를 눌러 상품 보기</span>
+        </a>
+
+        <div class="content">
+          <span class="number">PRODUCT 01</span>
+          <h2>싱크대 주변을 한곳에 정리하는 아이템</h2>
+          <p>
+            세제, 수세미, 솔처럼 자주 사용하는 주방용품을 한곳에 모아
+            싱크대 주변을 정리할 때 활용할 수 있습니다.
+          </p>
+
+          <div class="features" aria-label="상품 특징">
+            <span>싱크대 정리</span>
+            <span>공간 활용</span>
+            <span>깔끔한 수납</span>
+          </div>
+
+          <a
+            class="button"
+            href="https://link.coupang.com/a/fHwJmeevv3"
+            target="_blank"
+            rel="nofollow sponsored noopener noreferrer"
+            aria-label="상품 1 쿠팡 상품 페이지로 이동"
+          >
+            <span>쿠팡 상품 페이지로 바로 이동합니다</span>
+            <strong>상품 자세히 보기 →</strong>
+          </a>
+        </div>
+      </article>
+
+      <!-- 상품 2 -->
+      <article class="product-card">
+        <a
+          class="product-image-link"
+          href="https://link.coupang.com/a/fHATioP7Uy"
+          target="_blank"
+          rel="nofollow sponsored noopener noreferrer"
+          aria-label="상품 2 다용도 주방 칼꽂이 자세히 보기"
+        >
+          <img
+            src="2.png"
+            alt="칼, 가위, 수저, 도마와 행주를 함께 정리하는 다용도 주방 칼꽂이"
+          >
+          <span class="click-label">이미지를 눌러 상품 보기</span>
+        </a>
+
+        <div class="content">
+          <span class="number">PRODUCT 02</span>
+          <h2>주방 위생과 정리를 위한 올인원 수납</h2>
+          <p>
+            칼, 가위, 수저, 도마와 행주처럼 자주 사용하는 조리도구를
+            한곳에 정리할 때 활용할 수 있는 다용도 주방 칼꽂이입니다.
+            자세한 구성과 사용 조건은 상품 페이지에서 확인해 주세요.
+          </p>
+
+          <div class="features" aria-label="상품 특징">
+            <span>칼·가위 수납</span>
+            <span>도마 거치</span>
+            <span>행주 걸이</span>
+            <span>물받이 공간</span>
+          </div>
+
+          <a
+            class="button"
+            href="https://link.coupang.com/a/fHATioP7Uy"
+            target="_blank"
+            rel="nofollow sponsored noopener noreferrer"
+            aria-label="상품 2 쿠팡 상품 페이지로 이동"
+          >
+            <span>쿠팡 상품 페이지로 바로 이동합니다</span>
+            <strong>상품 자세히 보기 →</strong>
+          </a>
+        </div>
+      </article>
+
+    </section>
+
+    <div class="guide">
+      본 페이지의 이미지는 상품의 사용 장면과 특징을 이해하기 위한 콘텐츠입니다.
+      실제 상품의 색상, 크기, 구성품, 가격, 배송 및 판매 조건은
+      각 판매 페이지에 표시된 최신 정보를 기준으로 확인해 주세요.
+    </div>
+
+    <footer>© 2026 보라쿡 준선생의 생활정보</footer>
+  </main>
 </body>
 </html>
